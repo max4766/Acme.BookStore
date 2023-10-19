@@ -1,0 +1,24 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Acme.BookStore.Localization
+@using Volo.Abp.Users
+@model Acme.BookStore.Web.Pages.Charts.IndexModel
+@inject IHtmlLocalizer<BookStoreResource> L
+@inject ICurrentUser CurrentUser
+@section styles {
+<abp-style src="/Pages/Index.css" />
+}
+@section scripts {
+<abp-script src="/Pages/Charts/jquery.js" />
+<abp-script src="/Pages/Charts/echarts.js" />
+<abp-script src="/Pages/Charts/index.js" />
+}
+<div class="card">
+    <div class="card-header">
+        <button id="checkData" class="btn btn-primary mb-1">Click me to check DataChart API</button>
+        <div id="chart-data"></div>
+    </div>
+    <div class="card-body">
+        <div id="main" style="width: 100%; min-height:720px;"></div>
+    </div>
+</div>
