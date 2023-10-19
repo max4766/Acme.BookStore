@@ -8,8 +8,8 @@ namespace DataChart
     public interface IDataChartService : IApplicationService
     {
         Task<List<ChartRandomDataItemDto>> GetListAsync();
-        /*Task<ChartRandomDataItemDto> CreateAsync(string text);*/
-        /*Task DeleteAsync(Guid id);*/
+        Task<ChartRandomDataItemDto> CreateAsync(string text);
+        Task DeleteAsync(Guid id);
     }
 }
 

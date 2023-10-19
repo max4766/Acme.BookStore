@@ -32,10 +32,15 @@ button.addEventListener('click', function () {
     function fetchData() {
         $.ajax({
             type: "GET",
-            url: '/api/app/data-chart',
+            url: '/api/app/data-chart/random-numbers',
             success: function (data) {
                 // 요청이 성공하면 반환된 데이터를 처리합니다.
-                $('#chart-data').html(data);
+                let target = option.series[0].data;
+                target.forEach((element, index, array) => {
+                    array[index] = data[index]
+                }); 
+                option && myChart.setOption(option);
+
             },
             error: function (err) {
                 // 요청이 실패한 경우 에러 처리를 수행합니다.

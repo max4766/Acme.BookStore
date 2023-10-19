@@ -28,7 +28,7 @@ namespace DataChart
                 }).ToList();
         }
 
-        /*public async Task<ChartRandomDataItemDto> CreateAsync(string text)
+        public async Task<ChartRandomDataItemDto> CreateAsync(string text)
         {
             var chartRandomDataItem = await _chartRandomDataItemRepository.InsertAsync(
                 new ChartRandomDataItem { Text = text }
@@ -39,12 +39,26 @@ namespace DataChart
                 Id = chartRandomDataItem.Id,
                 Text = chartRandomDataItem.Text
             };
-        }*/
+        }
 
-        /*public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
             await _chartRandomDataItemRepository.DeleteAsync(id);
-        }*/
+        }
+
+        
+        public async Task<List<int>> GetRandomNumbers()
+        {
+            Random random = new Random();
+            List<int> randomNumbers = new List<int>();
+
+            for (int i = 0; i < 7; i++)
+            {
+                randomNumbers.Add(random.Next(1, 101)); // 1에서 100 사이의 난수 생성
+            }
+
+            return randomNumbers;
+        }
 
     }
 }
