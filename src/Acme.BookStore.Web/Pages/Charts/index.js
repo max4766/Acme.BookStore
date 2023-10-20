@@ -1,28 +1,6 @@
-﻿var chartDom = document.getElementById('main');
-var myChart = echarts.init(chartDom);
-var option;
-
-option = {
-    xAxis: {
-        type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    },
-    yAxis: {
-        type: 'value'
-    },
-    series: [
-        {
-            data: [120, 200, 150, 80, 70, 110, 130],
-            type: 'bar',
-            showBackground: true,
-            backgroundStyle: {
-                color: 'rgba(180, 180, 180, 0.2)'
-            }
-        }
-    ]
-};
-
-option && myChart.setOption(option);
+﻿$(document).ready(function () {
+    drawChart();
+});
 
 // 버튼 클릭 시 ChartData API 출력
 const button = document.getElementById('checkData');
@@ -34,13 +12,13 @@ button.addEventListener('click', function () {
             type: "GET",
             url: '/api/app/data-chart/random-numbers',
             success: function (data) {
-                // 요청이 성공하면 반환된 데이터를 처리합니다.
+                // 요청이 성공시 반환된 데이터를 처리
                 let target = option.series[0].data;
-                target.forEach((element, index, array) => {
-                    array[index] = data[index]
+                target.forEach((element, index, array) => { 
+                    array[index] = data.number[index]
                 }); 
+                // option 초기화
                 option && myChart.setOption(option);
-
             },
             error: function (err) {
                 // 요청이 실패한 경우 에러 처리를 수행합니다.
@@ -52,3 +30,35 @@ button.addEventListener('click', function () {
     // 페이지 로드 시 데이터 가져오기 함수 호출
     fetchData();
 });
+
+var btnTextchange = function () {
+    document.getElementById("checkData").innerText = "Click more to change more!";
+}
+
+var chartDom = document.getElementById('main');
+var myChart = echarts.init(chartDom);
+var option;
+var drawChart = function () {
+    
+    option = {
+        xAxis: {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                data: [120, 200, 150, 80, 70, 110, 130],
+                type: 'bar',
+                showBackground: true,
+                backgroundStyle: {
+                    color: 'rgba(180, 180, 180, 0.2)'
+                }
+            }
+        ]
+    };
+
+    option && myChart.setOption(option);
+}

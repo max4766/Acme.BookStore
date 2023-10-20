@@ -46,19 +46,22 @@ namespace DataChart
             await _chartRandomDataItemRepository.DeleteAsync(id);
         }
 
-        
-        public async Task<List<int>> GetRandomNumbers()
+
+        public async Task<RandomNumberDto> GetRandomNumbers()
         {
             Random random = new Random();
-            List<int> randomNumbers = new List<int>();
+            RandomNumberDto dto = new RandomNumberDto();
+            dto.Number = new List<int>();
 
             for (int i = 0; i < 7; i++)
             {
-                randomNumbers.Add(random.Next(1, 101)); // 1에서 100 사이의 난수 생성
+                int randomNumber = random.Next(1, 101);
+                dto.Number.Add(randomNumber);
             }
 
-            return randomNumbers;
+            return dto;
         }
+
 
     }
 }

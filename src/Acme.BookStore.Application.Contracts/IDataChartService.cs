@@ -10,6 +10,7 @@ namespace DataChart
         Task<List<ChartRandomDataItemDto>> GetListAsync();
         Task<ChartRandomDataItemDto> CreateAsync(string text);
         Task DeleteAsync(Guid id);
+        /*Task<List<RandomNumberDto>> GetRandomNumbers();*/
     }
 }
 
