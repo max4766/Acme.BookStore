@@ -4,7 +4,6 @@
 
 // 버튼 클릭 시 ChartData API 출력
 const button = document.getElementById('checkData');
-
 button.addEventListener('click', function () {
     // AJAX GET 요청을 보내는 함수
     function fetchData() {
@@ -12,34 +11,30 @@ button.addEventListener('click', function () {
             type: "GET",
             url: '/api/app/data-chart/random-numbers',
             success: function (data) {
-                // 요청이 성공시 반환된 데이터를 처리
-                let target = option.series[0].data;
-                target.forEach((element, index, array) => { 
-                    array[index] = data.number[index]
-                }); 
-                // option 초기화
-                option && myChart.setOption(option);
+                // 차트 새로고침
+                refreshChart(data.number);
             },
             error: function (err) {
-                // 요청이 실패한 경우 에러 처리를 수행합니다.
+                // 요청실패시 에러 처리
                 console.error('데이터 가져오기 실패:', err);
             }
         });
     }
-
-    // 페이지 로드 시 데이터 가져오기 함수 호출
+    // 페이지 로드시 데이터 가져오기 함수 호출
     fetchData();
 });
 
+// 버튼 클릭시 텍스트 변환 함수
 var btnTextchange = function () {
     document.getElementById("checkData").innerText = "Click more to change more!";
 }
 
+// 차트를 그리는 함수
 var chartDom = document.getElementById('main');
 var myChart = echarts.init(chartDom);
 var option;
+var seriesData = [120, 200, 150, 80, 70, 110, 130]; //기본값으로 지정한 배열
 var drawChart = function () {
-    
     option = {
         xAxis: {
             type: 'category',
@@ -50,7 +45,7 @@ var drawChart = function () {
         },
         series: [
             {
-                data: [120, 200, 150, 80, 70, 110, 130],
+                data: seriesData,
                 type: 'bar',
                 showBackground: true,
                 backgroundStyle: {
@@ -59,6 +54,11 @@ var drawChart = function () {
             }
         ]
     };
+    option && myChart.setOption(option);
+}
 
+//차트를 업데이트 하는 함수
+var refreshChart = function (data) {
+    option.series[0].data = data;
     option && myChart.setOption(option);
 }

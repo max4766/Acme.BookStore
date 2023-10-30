@@ -6,6 +6,7 @@ namespace DataChart
     public class RandomNumberDto
     {
         public List<int> Number { get; set; }
+
     }
 }
 

@@ -49,7 +49,7 @@ namespace DataChart
 
         public async Task<RandomNumberDto> GetRandomNumbers()
         {
-            Random random = new Random();
+            Random random = new Random(); 
             RandomNumberDto dto = new RandomNumberDto();
             dto.Number = new List<int>();
 
